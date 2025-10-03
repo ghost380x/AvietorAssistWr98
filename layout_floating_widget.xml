@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content" android:layout_height="wrap_content"
+android:orientation="vertical" android:padding="8dp" android:background="#90000000"
+android:alpha="0.9" android:elevation="6dp">
+<TextView android:id="@+id/tv_titulo" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:text="✈️ Analisador (IA)" android:textColor="#FFFFFF" android:textSize="12sp"
+android:textStyle="bold" android:gravity="center" android:paddingBottom="4dp"/>
+<TextView android:id="@+id/tv_historico_recente" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:text="Sequência: A-R-A-A (0/20)" android:textColor="#CCCCCC" android:textSize="10sp"
+android:paddingBottom="4dp" android:gravity="center"/>
+<TextView android:id="@+id/tv_alerta_ia" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:text="Clique em SCAN para iniciar a análise." android:textColor="#FFFF00"
+android:textSize="12sp" android:textStyle="bold" android:paddingTop="4dp"
+android:paddingBottom="8dp" android:gravity="center" android:background="#20FFFFFF"/>
+<Button android:id="@+id/btn_capturar_vela" android:layout_width="wrap_content" android:layout_height="35dp"
+android:layout_gravity="center" android:paddingStart="16dp" android:paddingEnd="16dp"
+android:text="SCAN & ANALISAR" android:textColor="#000000" android:textSize="12sp"
+android:textStyle="bold" android:backgroundTint="#00FF00"/>
+</LinearLayout>
