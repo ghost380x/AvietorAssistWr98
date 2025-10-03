@@ -2,7 +2,7 @@ name: Android CI Build
 
 on:
   push:
-    branches: [ "principal" ] # OU main, dependendo da sua branch padrão
+    branches: [ "principal" ] # Verifique se sua branch é 'principal' ou 'main'
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    # PASSO 1: Descompacta o seu arquivo ZIP, criando a pasta AviatorAssist/
+    # PASSO 1: Descompacta o seu arquivo ZIP (usando o nome que está no seu repositório)
     - name: Unzip Project Files
       run: unzip AviatorAssist.zip
       
@@ -22,17 +22,16 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    # PASSO 2: Entra na pasta do projeto, dá permissão e executa a compilação
+    # PASSO 2: Compilação usando o caminho completo para a pasta AviatorAssist-main
     - name: Build debug APK
       run: |
-        cd AviatorAssist
-        chmod +x gradlew
-        ./gradlew assembleDebug
+        # Usamos AviatorAssist-main como o nome da pasta de projeto mais provável após o unzip
+        chmod +x AviatorAssist-main/gradlew 
+        ./AviatorAssist-main/gradlew assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
         name: AviatorAssist-APK
-        # O caminho do APK deve incluir a pasta AviatorAssist
-        path: AviatorAssist/app/build/outputs/apk/debug/app-debug.apk
-        
+        # Caminho completo do APK dentro da pasta descompactada
+        path: AviatorAssist-main/app/build/outputs/apk/debug/app-debug.apk
