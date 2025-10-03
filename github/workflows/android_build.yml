@@ -15,6 +15,12 @@ jobs:
     - name: Unzip Project Files
       run: unzip AviatorAssist.zip
     
+    # PASSO 2: CORREÇÃO DO ERRO 'Could not find com.android.tools.build:gradle'
+    # Adiciona o repositório 'google()' para que o Gradle possa encontrar o plugin 8.4.1
+    - name: Fix Missing Google Repository
+      run: |
+        sed -i '/pluginManagement {/a \ \ \ \ repositories {\n \ \ \ \ \ \ \ \ google()\n \ \ \ \ \ \ \ \ mavenCentral()\n \ \ \ \ }' AviatorAssist/settings.gradle
+
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
@@ -22,18 +28,15 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    # PASSO 2: Compilação usando o caminho CORRETO: AviatorAssist/
+    # PASSO 3: Compilação usando o caminho CORRETO: AviatorAssist/
     - name: Build debug APK
       run: |
-        # Dá permissão de execução ao gradlew dentro da pasta AviatorAssist/
         chmod +x AviatorAssist/gradlew 
-        # Executa o build a partir da pasta AviatorAssist/
         ./AviatorAssist/gradlew assembleDebug
 
-    # PASSO 3: Upload do APK
+    # PASSO 4: Upload do APK
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
         name: AviatorAssist-APK
-        # Caminho completo do APK dentro da pasta descompactada
         path: AviatorAssist/app/build/outputs/apk/debug/app-debug.apk
